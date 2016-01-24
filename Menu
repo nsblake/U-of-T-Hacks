@@ -1,0 +1,32 @@
+using UnityEngine;
+using System.Collections;
+
+public class Menu : MonoBehaviour { 
+
+    public GameObject myo = null;
+
+    void OnGUI()
+    {
+        GUI.skin.label.fontSize = 12;
+
+        ThalmicHub hub = ThalmicHub.instance;
+
+        ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo>();
+
+        GUI.Label(new Rect(12, 8, Screen.width, Screen.height),
+            "Press 'o' to open next scene"// +
+            /*"Wave in: Rotate left\n" +
+            "Wave out: Rotate Right\n" +
+            "Double tap: Change direction of rotation\n" +
+            "Fingers spread: Zoom in/n"*/
+       );
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown("o"))
+        {
+            Application.LoadLevel("Test");
+        }
+    }
+}
