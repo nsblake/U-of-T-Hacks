@@ -10,44 +10,61 @@ public class SampleSceneGUI : MonoBehaviour
     public GameObject myo = null;
 
     // Draw some basic instructions.
-    void OnGUI ()
+    void OnGUI()
     {
         GUI.skin.label.fontSize = 20;
 
         ThalmicHub hub = ThalmicHub.instance;
 
         // Access the ThalmicMyo script attached to the Myo object.
-        ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo> ();
+        ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo>();
 
-        if (!hub.hubInitialized) {
-            GUI.Label(new Rect (12, 8, Screen.width, Screen.height),
+        if (!hub.hubInitialized)
+        {
+            GUI.Label(new Rect(12, 8, Screen.width, Screen.height),
                 "Cannot contact Myo Connect. Is Myo Connect running?\n" +
                 "Press Q to try again."
             );
-        } else if (!thalmicMyo.isPaired) {
-            GUI.Label(new Rect (12, 8, Screen.width, Screen.height),
+        }
+        else if (!thalmicMyo.isPaired)
+        {
+            GUI.Label(new Rect(12, 8, Screen.width, Screen.height),
                 "No Myo currently paired."
             );
-        } else if (!thalmicMyo.armSynced) {
-            GUI.Label(new Rect (12, 8, Screen.width, Screen.height),
+        }
+        else if (!thalmicMyo.armSynced)
+        {
+            GUI.Label(new Rect(12, 8, Screen.width, Screen.height),
                 "Perform the Sync Gesture."
             );
-        } else {
-            GUI.Label (new Rect (12, 8, Screen.width, Screen.height),
+        }
+        else if (JointOrientation.flag){
+            GUI.Label(new Rect(12, 8, Screen.width, Screen.height),
                 "Fist: Zoom out\n" +
                 "Wave in: Rotate left\n" +
                 "Wave out: Rotate Right\n" +
                 "Double tap: Change direction of rotation\n" +
-                "Fingers spread: Zoom in/n"
+                "Fingers spread: Zoom in\n" + "Axis: X"
+            );
+        }
+        else
+        {
+            GUI.Label(new Rect(12, 8, Screen.width, Screen.height),
+                "Fist: Zoom out\n" +
+                "Wave in: Rotate left\n" +
+                "Wave out: Rotate Right\n" +
+                "Double tap: Change direction of rotation\n" +
+                "Fingers spread: Zoom in\n" + "Axis: Y"
             );
         }
     }
 
-    void Update ()
+    void Update()
     {
         ThalmicHub hub = ThalmicHub.instance;
 
-        if (Input.GetKeyDown ("q")) {
+        if (Input.GetKeyDown("q"))
+        {
             hub.ResetHub();
         }
     }
